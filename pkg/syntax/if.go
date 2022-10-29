@@ -1,6 +1,6 @@
 package syntax
 
-func IfThenElse(ifCon bool, thenCase any, elseCase any) any {
+func IfThenElse[T any](ifCon bool, thenCase T, elseCase T) T {
 	if ifCon {
 		return thenCase
 	}

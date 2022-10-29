@@ -17,3 +17,11 @@ func Int(s string) (int, error) {
 func Int64(s string) (int64, error) {
 	return strconv.ParseInt(s, 10, 64)
 }
+
+func Bool(s string) (bool, error) {
+	return strconv.ParseBool(s)
+}
+
+func Ptr(s string) *string {
+	return &s
+}

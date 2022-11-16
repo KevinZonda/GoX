@@ -31,7 +31,7 @@ func (c char) Append(s string) string {
 	return sb.String()
 }
 
-func (c char) Preappend(s string) string {
+func (c char) Prepend(s string) string {
 	var sb strings.Builder
 	sb.WriteString(s)
 	sb.WriteRune(rune(c))

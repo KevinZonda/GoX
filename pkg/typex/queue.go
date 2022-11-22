@@ -18,7 +18,7 @@ func (q *Queue[T]) Dequeue() (data T, ok bool) {
 
 func (q *Queue[T]) TakeFirst() (data T, ok bool) {
 	if len(q.data) == 0 {
-		return nil, false
+		return data, false
 	}
 	data = q.data[0]
 	return data, true

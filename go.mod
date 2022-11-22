@@ -1,3 +1,2 @@
-module github.com/KevinZonda/go-utilities
-
+module github.com/KevinZonda/GoX
 go 1.19

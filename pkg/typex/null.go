@@ -17,7 +17,7 @@ type nullable[T any] struct {
 	value  T
 }
 
-func (n nullable[T]) Value() (val T, err error) {
+func (n *nullable[T]) Value() (val T, err error) {
 	if n.IsNull() {
 		err = errors.New("access null value")
 		return
@@ -26,17 +26,17 @@ func (n nullable[T]) Value() (val T, err error) {
 	return
 }
 
-func (n nullable[T]) IsNull() bool {
+func (n *nullable[T]) IsNull() bool {
 	return n.isNull
 }
 
-func (n nullable[T]) NotNull() {
+func (n *nullable[T]) NotNull() {
 	if n.IsNull() {
 		panic(fmt.Sprintf("Nullable %+v is null however we confirm it should be notnull!", n))
 	}
 }
 
-func (n nullable[T]) MarshalJSON() ([]byte, error) {
+func (n *nullable[T]) MarshalJSON() ([]byte, error) {
 	if n.isNull {
 		return json.Marshal(nil)
 	}
@@ -57,14 +57,14 @@ func (n *nullable[T]) UnmarshalJSON(b []byte) error {
 }
 
 func NewNotNull[T any](value T) Nullable[T] {
-	return nullable[T]{
+	return &nullable[T]{
 		value:  value,
 		isNull: false,
 	}
 }
 
 func NewNull[T any]() Nullable[T] {
-	return nullable[T]{
+	return &nullable[T]{
 		isNull: true,
 	}
 }

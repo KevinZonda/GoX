@@ -47,3 +47,13 @@ func TestNullableValue(t *testing.T) {
 		t.Fatal("not null")
 	}
 }
+
+func TestNullableNotNull(t *testing.T) {
+	n := NewNull[string]()
+	defer func() {
+		if r := recover(); r == nil {
+			t.Fatal("not null")
+		}
+	}()
+	n.NotNull()
+}

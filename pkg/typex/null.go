@@ -10,6 +10,8 @@ type Nullable[T any] interface {
 	IsNull() bool
 	Value() (T, error)
 	NotNull()
+	Null()
+	UnNull(value T)
 }
 
 type nullable[T any] struct {
@@ -37,6 +39,15 @@ func (n *nullable[T]) NotNull() {
 	if n.IsNull() {
 		panic(fmt.Sprintf("Nullable %+v is null however we confirm it should be notnull!", n))
 	}
+}
+
+func (n *nullable[T]) Null() {
+	n.isNull = true
+}
+
+func (n *nullable[T]) UnNull(value T) {
+	n.isNull = false
+	n.value = value
 }
 
 func (n *nullable[T]) MarshalJSON() ([]byte, error) {

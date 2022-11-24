@@ -3,6 +3,7 @@ package console
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 type Colour int
@@ -90,21 +91,28 @@ func (p PrintConfig) WithUnderline(u bool) PrintConfig {
 }
 
 func (p PrintConfig) Write(format string, params ...interface{}) {
-	fmt.Printf(p.Foreground.Foreground())
-	fmt.Printf(p.Background.Background())
-	if p.Bold {
-		fmt.Printf(Bold)
+	cfg, needReset := p.ConsoleString()
+	fmt.Printf(cfg+format, params...)
+	if needReset {
+		ResetColour()
 	}
-	if p.Underline {
-		fmt.Printf(Underline)
-	}
-	fmt.Printf(format, params...)
-	if p.Underline == false && p.Bold == false && p.Background == None && p.Foreground == None {
-		return
-	}
-	fmt.Printf(ResetColourSymbol)
 }
 
 func ResetColour() {
 	fmt.Printf(ResetColourSymbol)
+}
+
+func (p PrintConfig) ConsoleString() (cfg string, needReset bool) {
+	var sb strings.Builder
+	sb.WriteString(p.Foreground.Foreground())
+	sb.WriteString(p.Background.Background())
+	if p.Bold {
+		sb.WriteString(Bold)
+	}
+	if p.Underline {
+		sb.WriteString(Underline)
+	}
+	cfg = sb.String()
+	needReset = p.Underline || p.Bold || p.Background != None || p.Foreground != None
+	return
 }

@@ -1,6 +1,7 @@
 package typex
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 )
@@ -33,6 +34,26 @@ func (n nullable[T]) NotNull() {
 	if n.IsNull() {
 		panic(fmt.Sprintf("Nullable %+v is null however we confirm it should be notnull!", n))
 	}
+}
+
+func (n nullable[T]) MarshalJSON() ([]byte, error) {
+	if n.isNull {
+		return json.Marshal(nil)
+	}
+	return json.Marshal(n.value)
+}
+
+func (n *nullable[T]) UnmarshalJSON(b []byte) error {
+	var m *T
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+	n.isNull = m == nil
+	if m != nil {
+		n.value = *m
+	}
+	return nil
 }
 
 func NewNotNull[T any](value T) Nullable[T] {

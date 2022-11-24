@@ -1,6 +1,9 @@
 package console
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 type Colour int
 
@@ -17,7 +20,7 @@ const (
 	None   Colour = -1
 )
 
-const ResetColour = "\033[0m"
+const ResetColourSymbol = "\033[0m"
 
 const (
 	Bold      = "\033[1m"
@@ -28,14 +31,14 @@ func (c Colour) Foreground() string {
 	if c == None {
 		return ""
 	}
-	return "\033[" + string(30+c) + "m"
+	return "\033[" + strconv.Itoa(int(30+c)) + "m"
 }
 
 func (c Colour) Background() string {
 	if c == None {
 		return ""
 	}
-	return "\033[" + string(40+c) + "m"
+	return "\033[" + strconv.Itoa(int(40+c)) + "m"
 }
 
 type PrintConfig struct {
@@ -96,5 +99,12 @@ func (p PrintConfig) Write(format string, params ...interface{}) {
 		fmt.Printf(Underline)
 	}
 	fmt.Printf(format, params...)
-	fmt.Printf(ResetColour)
+	if p.Underline == false && p.Bold == false && p.Background == None && p.Foreground == None {
+		return
+	}
+	fmt.Printf(ResetColourSymbol)
+}
+
+func ResetColour() {
+	fmt.Printf(ResetColourSymbol)
 }

@@ -2,6 +2,7 @@ package typex
 
 import (
 	"encoding/json"
+	"fmt"
 	"testing"
 )
 
@@ -11,12 +12,37 @@ func TestNullableJsonSerialise(t *testing.T) {
 	if string(bs) != "\"hello\"" {
 		t.Fatal("not hello")
 	}
+	n = NewNull[string]()
+	bs, _ = json.Marshal(n)
+	if string(bs) != "null" {
+		t.Fatal("not null")
+	}
+}
+
+type mod struct {
+	Val Nullable[string]
 }
 
 func TestNullableJsonDeserialise(t *testing.T) {
+	j := []byte("\"hello\"")
 	n := NewNull[string]()
-	bs, _ := json.Marshal(n)
-	if string(bs) != "null" {
+	err := json.Unmarshal(j, &n)
+	if err != nil || n.IsNull() {
+		t.Fatal(err)
+	}
+	v, err := n.Value()
+	if err != nil || v != "hello" {
+		t.Fatal(err)
+	}
+
+	j = []byte("{\"Val\": \"hello\"}")
+	m := mod{}
+	err = json.Unmarshal(j, &m)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Printf("%+v", m)
+	if !m.Val.IsNull() {
 		t.Fatal("not null")
 	}
 }

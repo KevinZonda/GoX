@@ -27,6 +27,9 @@ func (n *nullable[T]) Value() (val T, err error) {
 }
 
 func (n *nullable[T]) IsNull() bool {
+	if n == nil {
+		return true
+	}
 	return n.isNull
 }
 
@@ -44,7 +47,7 @@ func (n *nullable[T]) MarshalJSON() ([]byte, error) {
 }
 
 func (n *nullable[T]) UnmarshalJSON(b []byte) error {
-	var m *T
+	var m *T = nil
 	err := json.Unmarshal(b, &m)
 	if err != nil {
 		return err

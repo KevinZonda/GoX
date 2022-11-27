@@ -1,6 +1,6 @@
-package pointerx
+package arrayx
 
-func NotNil[T any](a ...*any) bool {
+func NotNil(a ...any) bool {
 	for _, v := range a {
 		if v == nil {
 			return false

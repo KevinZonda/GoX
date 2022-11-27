@@ -15,16 +15,17 @@ func First[T any](l []T) (fst T, ok bool) {
 }
 
 func Map[T any, K any](from []T, tx func(T) K) []K {
-	var v []K
-	for _, t := range from {
-		v = append(v, tx(t))
+	v := make([]K, len(from))
+	for i, t := range from {
+		v[i] = tx(t)
 	}
 	return v
 }
 
 func ForEach[T any](arr []T, f func(index int, data T) T) []T {
+	r := make([]T, len(arr))
 	for i, v := range arr {
-		arr[i] = f(i, v)
+		r[i] = f(i, v)
 	}
 	return arr
 }

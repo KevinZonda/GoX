@@ -37,3 +37,13 @@ func TestMap(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestForEach(t *testing.T) {
+	v := []int{1, 2, 3}
+	ForEach(v, func(index int, data int) int {
+		return data * 2
+	})
+	if len(v) != 3 || v[0] != 2 || v[1] != 4 || v[2] != 6 {
+		t.Fail()
+	}
+}

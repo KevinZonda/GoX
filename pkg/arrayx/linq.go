@@ -23,9 +23,8 @@ func Map[T any, K any](from []T, tx func(T) K) []K {
 }
 
 func ForEach[T any](arr []T, f func(index int, data T) T) []T {
-	r := make([]T, len(arr))
 	for i, v := range arr {
-		r[i] = f(i, v)
+		arr[i] = f(i, v)
 	}
 	return arr
 }

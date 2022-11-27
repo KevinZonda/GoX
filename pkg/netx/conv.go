@@ -2,15 +2,16 @@ package netx
 
 import (
 	"encoding/binary"
+	"errors"
 	"math/big"
 	"net"
 )
 
-func IPv4ToInt(ip net.IP) uint32 {
+func IPv4ToInt(ip net.IP) (uint32, error) {
 	if len(ip) == 16 {
-		panic("no sane way to convert ipv6 into uint32")
+		return 0, errors.New("IPv4ToInt: IPv6 address")
 	}
-	return binary.BigEndian.Uint32(ip)
+	return binary.BigEndian.Uint32(ip), nil
 }
 
 func IntToIPv4(nn uint32) net.IP {

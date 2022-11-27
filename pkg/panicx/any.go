@@ -13,3 +13,7 @@ func NotNil(a ...any) {
 		}
 	}
 }
+
+func NotImplemented() {
+	panic("Not implemented")
+}

@@ -15,5 +15,5 @@ func PanicIfNotNil(b any, v any) {
 }
 
 func PanicF(format string, a ...any) {
-	panic(fmt.Errorf(format, a...))
+	panic(fmt.Sprintf(format, a...))
 }

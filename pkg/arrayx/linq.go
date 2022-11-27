@@ -21,3 +21,23 @@ func Map[T any, K any](from []T, tx func(T) K) []K {
 	}
 	return v
 }
+
+func ForEach[T any](arr []T, f func(index int, data T) T) []T {
+	for i, v := range arr {
+		arr[i] = f(i, v)
+	}
+	return arr
+}
+
+func Where[T1 any](vs []T1, condition func(T1) bool) []T1 {
+	if len(vs) == 0 {
+		return vs
+	}
+	var a []T1
+	for _, v := range vs {
+		if condition(v) {
+			a = append(a, v)
+		}
+	}
+	return a
+}

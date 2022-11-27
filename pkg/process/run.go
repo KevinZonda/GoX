@@ -5,13 +5,13 @@ import (
 	"os/exec"
 )
 
-type Runable struct {
+type Runnable struct {
 	Name string
 	Args []string
 	Wait bool
 }
 
-func (r Runable) run() (cmd *exec.Cmd, err error) {
+func (r Runnable) run() (cmd *exec.Cmd, err error) {
 	if r.Wait {
 		return RunWithWait(r.Name, r.Args...)
 	}

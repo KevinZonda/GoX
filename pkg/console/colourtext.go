@@ -9,6 +9,12 @@ type ColourText struct {
 	Text string
 }
 
+func NewColourText(text string) *ColourText {
+	return &ColourText{
+		Text: text,
+	}
+}
+
 func (ct ColourText) String() string {
 	var sb strings.Builder
 	cfg, needReset := ct.ConsoleString()

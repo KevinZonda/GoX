@@ -1,4 +1,4 @@
-package typex
+package ds
 
 type Queue[T any] struct {
 	data []T

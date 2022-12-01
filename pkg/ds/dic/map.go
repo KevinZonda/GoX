@@ -1,6 +1,9 @@
 package dic
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type Dictionary[K comparable, V any] struct {
 	fields map[K]V
@@ -80,4 +83,18 @@ func (d *Dictionary[K, V]) Clone() *Dictionary[K, V] {
 	return &Dictionary[K, V]{
 		fields: d.CloneToMap(),
 	}
+}
+
+func (d *Dictionary[K, V]) MarshalJSON() ([]byte, error) {
+	return json.Marshal(d.fields)
+}
+
+func (d *Dictionary[K, V]) UnmarshalJSON(b []byte) error {
+	var m map[K]V = nil
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+	d.fields = m
+	return nil
 }

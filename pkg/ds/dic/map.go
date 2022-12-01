@@ -98,3 +98,7 @@ func (d *Dictionary[K, V]) UnmarshalJSON(b []byte) error {
 	d.fields = m
 	return nil
 }
+
+func (d *Dictionary[K, V]) Iterator() map[K]V {
+	return d.fields
+}

@@ -9,8 +9,20 @@ type ColourText struct {
 	Text string
 }
 
-func NewColourText(text string) *ColourText {
-	return &ColourText{
+func NewColourText(text string) ColourText {
+	return ColourText{
+		Text: text,
+	}
+}
+
+func ColourfulText(text string, foreground Colour, background Colour) ColourText {
+	return ColourText{
+		PrintConfig: PrintConfig{
+			Foreground: foreground,
+			Background: background,
+			Bold:       false,
+			Underline:  false,
+		},
 		Text: text,
 	}
 }

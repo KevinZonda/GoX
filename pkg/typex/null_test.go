@@ -24,8 +24,6 @@ type mod struct {
 }
 
 func TestNullableJsonDeserialise(t *testing.T) {
-	return
-	// TODO: fix this test
 	j := []byte("\"hello\"")
 	n := NewNull[string]()
 	err := json.Unmarshal(j, &n)
@@ -44,7 +42,7 @@ func TestNullableJsonDeserialise(t *testing.T) {
 		t.Fatal(err)
 	}
 	fmt.Printf("%+v", m)
-	if !m.Val.IsNull() {
+	if m.Val.IsNull() {
 		t.Fatal("not null")
 	}
 }

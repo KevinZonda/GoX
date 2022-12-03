@@ -3,7 +3,7 @@ package typex
 type Maybe[T any] interface {
 	IsNothing() bool
 	IsJust() bool
-	Value() (value T, ok bool)
+	Value() T
 }
 
 type Nothing[T any] struct {
@@ -17,8 +17,8 @@ func (m *Nothing[T]) IsJust() bool {
 	return false
 }
 
-func (m *Nothing[T]) Value() (value T, ok bool) {
-	return value, false
+func (m *Nothing[T]) Value() T {
+	panic("Get value from Nothing")
 }
 
 type Just[T any] struct {
@@ -33,6 +33,16 @@ func (m *Just[T]) IsJust() bool {
 	return true
 }
 
-func (m *Just[T]) Value() (value T, ok bool) {
-	return m.value, true
+func (m *Just[T]) Value() T {
+	return m.value
+}
+
+func NewNothing[T any]() *Nothing[T] {
+	return &Nothing[T]{}
+}
+
+func NewJust[T any](value T) *Just[T] {
+	return &Just[T]{
+		value: value,
+	}
 }

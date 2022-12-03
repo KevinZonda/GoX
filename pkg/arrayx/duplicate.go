@@ -47,7 +47,7 @@ func Reverse[T any](a []T) {
 	}
 }
 
-func Sum[T constrains.Number](arr []T) T {
+func Sum[T constrains.Calculable](arr []T) T {
 	var sum T
 	for _, v := range arr {
 		sum += v

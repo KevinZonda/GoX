@@ -23,3 +23,7 @@ type Number interface {
 type Calculable interface {
 	Int | Uint | Float | Complex
 }
+
+type Character interface {
+	~rune | ~byte
+}

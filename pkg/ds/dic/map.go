@@ -47,7 +47,7 @@ func (d *Dictionary[K, V]) Contains(key K) bool {
 	return ok
 }
 
-func (d *Dictionary[K, V]) Len() int {
+func (d *Dictionary[K, V]) Size() int {
 	return len(d.fields)
 }
 

@@ -7,5 +7,6 @@ func TestTask(t *testing.T) {
 		println("Hello, World!")
 		return VoidResult
 	})
+	Async(m)
 	m.Wait()
 }

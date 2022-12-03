@@ -63,13 +63,3 @@ func (t *Task[T]) IsRunning() bool {
 func (t *Task[T]) Result() (T, error) {
 	return t.result.Value()
 }
-
-func Wait[T any](t *Task[T]) *Task[T] {
-	t.Wait()
-	return t
-}
-
-func Async[T any](t *Task[T]) *Task[T] {
-	t.Async()
-	return t
-}

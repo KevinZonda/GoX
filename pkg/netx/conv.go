@@ -25,8 +25,17 @@ func IPv6ToInt(ipv6 net.IP) *big.Int {
 	IPv6Int.SetBytes(ipv6)
 	return IPv6Int
 }
+
 func IntToIPv6(nn *big.Int) net.IP {
 	ip := nn.Bytes()
 	var a net.IP = ip
 	return a
+}
+
+func StringToIPv4(ip string) (uint32, error) {
+	return IPv4ToInt(net.ParseIP(ip))
+}
+
+func StringToIPv6(ip string) (*big.Int, error) {
+	return IPv6ToInt(net.ParseIP(ip)), nil
 }

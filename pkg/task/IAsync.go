@@ -1,7 +1,6 @@
 package task
 
 type IAsync interface {
-	// RunAsync runs the task asynchronously.
 	Async()
 }
 
@@ -15,4 +14,16 @@ type IWaitable interface {
 
 func Wait(task IWaitable) {
 	task.Wait()
+}
+
+type IRunnable interface {
+	Run()
+}
+
+func Run(task IRunnable) {
+	task.Run()
+}
+
+func RunAsync(task IRunnable) {
+	go task.Run()
 }

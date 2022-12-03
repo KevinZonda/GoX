@@ -27,3 +27,23 @@ func FromMicrosecond(sec int) time.Duration {
 func From(v int, unit time.Duration) time.Duration {
 	return time.Duration(v) * unit
 }
+
+func Between(left, mid, right time.Duration) time.Duration {
+	if left > right {
+		return left - mid
+	}
+	return mid - left
+}
+
+func IsBetween(left, mid, right time.Time) bool {
+	return mid.After(left) && mid.Before(right)
+
+}
+
+func NowIn(location string) (time.Time, error) {
+	loc, err := time.LoadLocation(location)
+	if err != nil {
+		return time.Time{}, err
+	}
+	return time.Now().In(loc), nil
+}

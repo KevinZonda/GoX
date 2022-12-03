@@ -1,10 +1,15 @@
 package task
 
-import "github.com/KevinZonda/GoX/pkg/typex"
+import (
+	"github.com/KevinZonda/GoX/pkg/typex"
+	"time"
+)
 
 type Status int
 
 type Void int
+
+const VoidResult Void = 0
 
 const (
 	StatusNone Status = iota
@@ -12,23 +17,28 @@ const (
 	StatusCompleted
 )
 
-type task[T any] struct {
+type Task[T any] struct {
 	f      func() T
 	status Status
 	result *typex.Nullable[T]
 }
 
-func NewTask[T any](f func() T) *task[T] {
-	return &task[T]{
+func New[T any](f func() T) *Task[T] {
+	return &Task[T]{
 		f:      f,
 		status: StatusNone,
 		result: typex.NewNull[T](),
 	}
 }
 
-func (t *task[T]) Wait() {
-	if t.status != StatusNone {
+func (t *Task[T]) Wait() {
+	if t.status == StatusCompleted {
 		return
+	}
+	if t.status == StatusRunning {
+		for t.status == StatusRunning {
+			time.Sleep(50 * time.Millisecond)
+		}
 	}
 	t.status = StatusRunning
 	r := t.f()
@@ -36,30 +46,30 @@ func (t *task[T]) Wait() {
 	t.status = StatusCompleted
 }
 
-func (t *task[T]) Async() {
+func (t *Task[T]) Async() {
 	go func() {
 		t.Wait()
 	}()
 }
 
-func (t *task[T]) IsCompleted() bool {
+func (t *Task[T]) IsCompleted() bool {
 	return t.status == StatusCompleted
 }
 
-func (t *task[T]) IsRunning() bool {
+func (t *Task[T]) IsRunning() bool {
 	return t.status == StatusRunning
 }
 
-func (t *task[T]) Result() (T, error) {
+func (t *Task[T]) Result() (T, error) {
 	return t.result.Value()
 }
 
-func Wait[T any](t *task[T]) *task[T] {
+func Wait[T any](t *Task[T]) *Task[T] {
 	t.Wait()
 	return t
 }
 
-func Async[T any](t *task[T]) *task[T] {
+func Async[T any](t *Task[T]) *Task[T] {
 	t.Async()
 	return t
 }

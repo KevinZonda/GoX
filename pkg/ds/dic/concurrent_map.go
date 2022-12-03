@@ -45,10 +45,10 @@ func (d *ConcurrentDictionary[K, V]) Contains(key K) bool {
 	return d.m.Contains(key)
 }
 
-func (d *ConcurrentDictionary[K, V]) Size() int {
+func (d *ConcurrentDictionary[K, V]) Count() int {
 	d.l.RLock()
 	defer d.l.RUnlock()
-	return d.m.Size()
+	return d.m.Count()
 }
 
 func (d *ConcurrentDictionary[K, V]) Keys() []K {

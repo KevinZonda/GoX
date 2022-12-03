@@ -8,6 +8,6 @@ type IDictionary[K comparable, V any] interface {
 	Contains(key K) bool
 	Keys() []K
 	Values() []V
-	Size() int
+	Count() int
 	Iterator() map[K]V
 }

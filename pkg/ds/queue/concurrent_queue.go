@@ -3,8 +3,8 @@ package queue
 import "sync"
 
 type ConcurrentQueue[T any] struct {
-	sync.RWMutex
-	ArrQueue[T]
+	l sync.RWMutex
+	q ArrQueue[T]
 }
 
 func NewConcurrentQueue[T any]() *ConcurrentQueue[T] {
@@ -12,25 +12,25 @@ func NewConcurrentQueue[T any]() *ConcurrentQueue[T] {
 }
 
 func (q *ConcurrentQueue[T]) Enqueue(data T) {
-	q.Lock()
-	defer q.Unlock()
-	q.ArrQueue.Enqueue(data)
+	q.l.Lock()
+	defer q.l.Unlock()
+	q.q.Enqueue(data)
 }
 
 func (q *ConcurrentQueue[T]) Dequeue() (data T, ok bool) {
-	q.Lock()
-	defer q.Unlock()
-	return q.ArrQueue.Dequeue()
+	q.l.Lock()
+	defer q.l.Unlock()
+	return q.q.Dequeue()
 }
 
 func (q *ConcurrentQueue[T]) TakeFirst() (data T, ok bool) {
-	q.RLock()
-	defer q.RUnlock()
-	return q.ArrQueue.TakeFirst()
+	q.l.RLock()
+	defer q.l.RUnlock()
+	return q.q.TakeFirst()
 }
 
 func (q *ConcurrentQueue[T]) ToSlice() []T {
-	q.RLock()
-	defer q.RUnlock()
-	return q.ArrQueue.ToSlice()
+	q.l.RLock()
+	defer q.l.RUnlock()
+	return q.q.ToSlice()
 }

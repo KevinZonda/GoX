@@ -1,19 +1,25 @@
 package task
 
-type IAsync interface {
+type ITask interface {
 	Async()
-}
-
-func Async(task IAsync) {
-	task.Async()
-}
-
-type IWaitable interface {
 	Wait()
 }
 
-func Wait(task IWaitable) {
+func Async(task ITask) {
+	task.Async()
+}
+
+func Wait(task ITask) {
 	task.Wait()
+}
+
+func WaitAll(tasks []ITask) {
+	for _, task := range tasks {
+		task.Async()
+	}
+	for _, task := range tasks {
+		task.Wait()
+	}
 }
 
 type IRunnable interface {

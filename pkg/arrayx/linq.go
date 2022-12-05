@@ -22,11 +22,18 @@ func Map[T any, K any](from []T, tx func(T) K) []K {
 	return v
 }
 
-func ForEach[T any](arr []T, f func(index int, data T) T) []T {
+func ForEach[T any](arr []T, f func(index int, data T)) {
+	for i, v := range arr {
+		i := i
+		v := v
+		f(i, v)
+	}
+}
+
+func EditAll[T any](arr []T, f func(index int, data T) T) {
 	for i, v := range arr {
 		arr[i] = f(i, v)
 	}
-	return arr
 }
 
 func Where[T1 any](vs []T1, condition func(T1) bool) []T1 {

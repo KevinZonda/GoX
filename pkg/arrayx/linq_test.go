@@ -1,6 +1,8 @@
 package arrayx
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestFirst(t *testing.T) {
 	v := []int{1, 2, 3}
@@ -40,10 +42,11 @@ func TestMap(t *testing.T) {
 
 func TestForEach(t *testing.T) {
 	v := []int{1, 2, 3}
-	ForEach(v, func(index int, data int) int {
-		return data * 2
+	var m []int
+	ForEach(v, func(index int, data int) {
+		m = append(m, data*2)
 	})
-	if len(v) != 3 || v[0] != 2 || v[1] != 4 || v[2] != 6 {
+	if len(m) != 3 || m[0] != 2 || m[1] != 4 || m[2] != 6 {
 		t.Fail()
 	}
 }

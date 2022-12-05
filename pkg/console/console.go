@@ -20,3 +20,12 @@ func WriteLine(format string, params ...any) {
 func Write(format string, params ...any) {
 	fmt.Printf(format, params...)
 }
+
+func ErrWriteLine(format string, params ...any) {
+	fmt.Fprintf(os.Stderr, format, params...)
+	fmt.Println("")
+}
+
+func ErrWrite(format string, params ...any) {
+	fmt.Fprintf(os.Stderr, format, params...)
+}

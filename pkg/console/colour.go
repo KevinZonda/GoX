@@ -2,6 +2,7 @@ package console
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -96,6 +97,22 @@ func (p PrintConfig) Write(format string, params ...interface{}) {
 	if needReset {
 		ResetColour()
 	}
+}
+
+func (p PrintConfig) WriteLine(format string, params ...interface{}) {
+	p.Write(format+"\n", params...)
+}
+
+func (p PrintConfig) ErrWrite(format string, params ...interface{}) {
+	cfg, needReset := p.ConsoleString()
+	fmt.Fprintf(os.Stderr, cfg+format, params...)
+	if needReset {
+		ResetColour()
+	}
+}
+
+func (p PrintConfig) ErrWriteLine(format string, params ...interface{}) {
+	p.ErrWrite(format+"\n", params...)
 }
 
 func ResetColour() {

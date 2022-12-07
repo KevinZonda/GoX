@@ -4,17 +4,20 @@ import (
 	"sync"
 )
 
+// ConcurrentDictionary is a thread-safe dictionary.
 type ConcurrentDictionary[K comparable, V any] struct {
 	m *Dictionary[K, V]
 	l sync.RWMutex
 }
 
+// NewConcurrentDictionary creates a new ConcurrentDictionary.
 func NewConcurrentDictionary[K comparable, V any]() *ConcurrentDictionary[K, V] {
 	return &ConcurrentDictionary[K, V]{
 		m: NewDictionary[K, V](),
 	}
 }
 
+// Add adds a new item to the dictionary.
 func (d *ConcurrentDictionary[K, V]) Add(key K, value V) bool {
 	d.l.Lock()
 	defer d.l.Unlock()

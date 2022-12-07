@@ -1,11 +1,7 @@
 package syntax
 
+// Comment is a comment in a source file.
+// Allows comment with syntax colouring
 func Comment(_ any) {
 
-}
-
-func If(b bool, f func()) {
-	if b {
-		f()
-	}
 }

@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// HasDuplicate returns true if the array has duplicate items.
 func HasDuplicate[T comparable](arr []T) bool {
 	m := make(map[T]bool)
 	for _, val := range arr {
@@ -18,6 +19,7 @@ func HasDuplicate[T comparable](arr []T) bool {
 	return false
 }
 
+// RemoveDuplicate returns a new array without duplicate items.
 func RemoveDuplicate[T comparable](arr []T) []T {
 	m := make(map[T]bool)
 	var a []T

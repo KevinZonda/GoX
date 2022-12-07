@@ -35,11 +35,18 @@ func Between(left, mid, right time.Duration) time.Duration {
 	return mid - left
 }
 
+// IsBetween returns true if the time is between the two times.
 func IsBetween(left, mid, right time.Time) bool {
 	return mid.After(left) && mid.Before(right)
 
 }
 
+// IsBetweenOrEqual returns true if the time is between the two times or equal to one of them.
+func IsBetweenOrEqual(left, mid, right time.Time) bool {
+	return mid.After(left) && mid.Before(right) || mid.Equal(left) || mid.Equal(right)
+}
+
+// NowIn returns the current time in the given location.
 func NowIn(location string) (time.Time, error) {
 	loc, err := time.LoadLocation(location)
 	if err != nil {

@@ -17,3 +17,21 @@ func SHA512(raw []byte) string {
 	h.Write(raw)
 	return hex.EncodeToString(h.Sum(nil))
 }
+
+func SHA384(raw []byte) string {
+	h := sha512.New384()
+	h.Write(raw)
+	return hex.EncodeToString(h.Sum(nil))
+}
+
+func SHA512_224(raw []byte) string {
+	h := sha512.New512_224()
+	h.Write(raw)
+	return hex.EncodeToString(h.Sum(nil))
+}
+
+func SHA512_256(raw []byte) string {
+	h := sha512.New512_256()
+	h.Write(raw)
+	return hex.EncodeToString(h.Sum(nil))
+}

@@ -23,3 +23,7 @@ func CurveMin(val, min int) int {
 	}
 	return val
 }
+
+func Ptr(val int) *int {
+	return &val
+}

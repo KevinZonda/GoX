@@ -8,6 +8,10 @@ func FromSecond(sec int) time.Duration {
 	return From(sec, time.Second)
 }
 
+func FromMinute(sec int) time.Duration {
+	return From(sec, time.Minute)
+}
+
 func FromHour(sec int) time.Duration {
 	return From(sec, time.Hour)
 }

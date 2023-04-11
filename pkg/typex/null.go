@@ -19,9 +19,11 @@ type Nullable[T any] struct {
 	value  T
 }
 
+var ErrNullValue = errors.New("value is null")
+
 func (n *Nullable[T]) Value() (val T, err error) {
 	if n.IsNull() {
-		err = errors.New("access null value")
+		err = ErrNullValue
 		return
 	}
 	val = n.value

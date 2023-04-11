@@ -1,4 +1,4 @@
-package maps
+package mapx
 
 func Clone[K comparable, V any](m map[K]V) map[K]V {
 	newM := make(map[K]V, len(m))

@@ -25,3 +25,10 @@ func Bool(s string) (bool, error) {
 func Ptr(s string) *string {
 	return &s
 }
+
+func AutoPtr(s string) *string {
+	if s == "" {
+		return nil
+	}
+	return &s
+}

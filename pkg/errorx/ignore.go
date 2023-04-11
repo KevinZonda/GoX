@@ -30,15 +30,15 @@ func IsWrapped(err error, tag string) bool {
 	return true
 }
 
-func Unwrap(err error, tag string) error {
+func Unwrap(err error, tag string) string {
 	if err == nil {
-		return nil
+		return ""
 	}
 	if !IsWrapped(err, tag) {
-		return err
+		return ""
 	}
 	msg := err.Error()
 	msg = msg[len("<"+tag+">"):]
 	msg = msg[:len(msg)-len("</"+tag+">")]
-	return errors.New(msg)
+	return msg
 }

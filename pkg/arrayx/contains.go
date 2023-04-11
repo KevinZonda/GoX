@@ -9,3 +9,12 @@ func Contains[T comparable](arr []T, item T) bool {
 	}
 	return false
 }
+
+func ContainsAny[T comparable](arr []T, items ...T) bool {
+	for _, item := range items {
+		if Contains(arr, item) {
+			return true
+		}
+	}
+	return false
+}

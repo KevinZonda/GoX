@@ -34,6 +34,12 @@ func ForEach[T any](arr []T, f func(index int, data T)) {
 	}
 }
 
+func ForEachRef[T any](arr []T, f func(index int, data *T)) {
+	for i := 0; i < len(arr); i++ {
+		f(i, &arr[i])
+	}
+}
+
 // Any returns true if the provided function returns true for any element in the array.
 func Any[T any](vs []T, condition func(T) bool) bool {
 	if len(vs) == 0 {

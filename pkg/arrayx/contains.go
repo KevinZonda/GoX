@@ -18,3 +18,12 @@ func ContainsAny[T comparable](arr []T, items ...T) bool {
 	}
 	return false
 }
+
+func ContainsAll[T comparable](arr []T, items ...T) bool {
+	for _, item := range items {
+		if !Contains(arr, item) {
+			return false
+		}
+	}
+	return true
+}

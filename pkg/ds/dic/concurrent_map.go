@@ -81,3 +81,21 @@ func (d *ConcurrentDictionary[K, V]) UnmarshalJSON(b []byte) error {
 	defer d.l.Unlock()
 	return d.m.UnmarshalJSON(b)
 }
+
+func (d *ConcurrentDictionary[K, V]) String() string {
+	d.l.RLock()
+	defer d.l.RUnlock()
+	return d.m.String()
+}
+
+func (d *ConcurrentDictionary[K, V]) ROper(f func(m map[K]V)) {
+	d.l.RLock()
+	defer d.l.RUnlock()
+	f(d.m.fields)
+}
+
+func (d *ConcurrentDictionary[K, V]) WOper(f func(m map[K]V)) {
+	d.l.Lock()
+	defer d.l.Unlock()
+	f(d.m.fields)
+}

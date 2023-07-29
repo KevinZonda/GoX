@@ -17,3 +17,7 @@ func RemoveAt[T any](arr []T, i int) []T {
 	}
 	return append(arr[:i], arr[i+1:]...)
 }
+
+func PreAppend[T any](item T, slice []T) []T {
+	return append([]T{item}, slice...)
+}

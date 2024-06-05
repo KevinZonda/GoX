@@ -20,7 +20,7 @@ func BytesToObjE[T any](s []byte) (T, error) {
 func BytesToObjPtr[T any](s []byte) *T {
 	var v T
 	err := json.Unmarshal(s, &v)
-	if err != nil || v == nil {
+	if err != nil {
 		return nil
 	}
 	return &v
@@ -29,7 +29,7 @@ func BytesToObjPtr[T any](s []byte) *T {
 func BytesToObjPtrE[T any](s []byte) (*T, error) {
 	var v T
 	err := json.Unmarshal(s, &v)
-	if err != nil || v == nil {
+	if err != nil {
 		return nil, err
 	}
 	return &v, nil

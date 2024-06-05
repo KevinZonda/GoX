@@ -35,3 +35,19 @@ func ReadAllLines(file string) (strs []string, err error) {
 	strs = strings.Split(str, "\n")
 	return
 }
+
+func IOReadAllText(i io.Reader) (string, error) {
+	bs, err := io.ReadAll(i)
+	if err != nil {
+		return "", err
+	}
+	return string(bs), nil
+}
+
+func IOReadAllLines(i io.Reader) ([]string, error) {
+	str, err := IOReadAllText(i)
+	if err != nil {
+		return nil, err
+	}
+	return strings.Split(str, "\n"), nil
+}

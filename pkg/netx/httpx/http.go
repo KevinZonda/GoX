@@ -1,21 +1,36 @@
 package httpx
 
 import (
+	"encoding/json"
 	"io"
-	"io/ioutil"
 	"net/http"
 )
 
-func GET(url string) (string, error) {
+func GETString(url string) (string, error) {
+	bs, err := GETBytes(url)
+	if err != nil {
+		return "", err
+	}
+	return string(bs), nil
+}
+
+func GETBytes(url string) (body []byte, err error) {
 	resp, err := http.Get(url)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err = io.ReadAll(resp.Body)
+	return
+}
+
+func GETJson[T any](url string) (T, error) {
+	var v T
+	bs, err := GETBytes(url)
 	if err != nil {
-		return "", err
+		return v, err
 	}
-	return string(body), nil
+	err = json.Unmarshal(bs, &v)
+	return v, err
 }
 
 var _defaultUA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"

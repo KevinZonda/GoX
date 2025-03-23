@@ -47,3 +47,13 @@ func Apl[T any](t T, list []T) []T {
 func Apr[T any](list []T, t T) []T {
 	return append(list, t)
 }
+
+func Apply[T any](t []T, f func(T)) {
+	for _, v := range t {
+		f(v)
+	}
+}
+
+func ApplyF[T any](t T, f func(T)) {
+	f(t)
+}

@@ -57,3 +57,11 @@ func Apply[T any](t []T, f func(T)) {
 func ApplyF[T any](t T, f func(T)) {
 	f(t)
 }
+
+func Left[T any](l T, r T) T {
+	return l
+}
+
+func Right[T any](l T, r T) T {
+	return r
+}

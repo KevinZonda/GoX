@@ -17,61 +17,61 @@ func AssertPanic[T any](in any) T {
 }
 
 func AssertAsInt(in any, ifFailed int) int {
-	switch in.(type) {
+	switch vt := in.(type) {
 	case int:
-		return in.(int)
+		return vt
 	case int8:
-		return int(in.(int8))
+		return int(vt)
 	case int16:
-		return int(in.(int16))
+		return int(vt)
 	case int32:
-		return int(in.(int32))
+		return int(vt)
 	case int64:
-		return int(in.(int64))
+		return int(vt)
 	case uint:
-		return int(in.(uint))
+		return int(vt)
 	case uint8:
-		return int(in.(uint8))
+		return int(vt)
 	case uint16:
-		return int(in.(uint16))
+		return int(vt)
 	case uint32:
-		return int(in.(uint32))
+		return int(vt)
 	case uint64:
-		return int(in.(uint64))
+		return int(vt)
 	case float32:
-		return int(in.(float32))
+		return int(vt)
 	case float64:
-		return int(in.(float64))
+		return int(vt)
 	}
 	return ifFailed
 }
 
 func AssertAsFloat(in any, ifFailed float64) float64 {
-	switch in.(type) {
+	switch vt := in.(type) {
 	case int:
-		return float64(in.(int))
+		return float64(vt)
 	case int8:
-		return float64(in.(int8))
+		return float64(vt)
 	case int16:
-		return float64(in.(int16))
+		return float64(vt)
 	case int32:
-		return float64(in.(int32))
+		return float64(vt)
 	case int64:
-		return float64(in.(int64))
+		return float64(vt)
 	case uint:
-		return float64(in.(uint))
+		return float64(vt)
 	case uint8:
-		return float64(in.(uint8))
+		return float64(vt)
 	case uint16:
-		return float64(in.(uint16))
+		return float64(vt)
 	case uint32:
-		return float64(in.(uint32))
+		return float64(vt)
 	case uint64:
-		return float64(in.(uint64))
+		return float64(vt)
 	case float32:
-		return float64(in.(float32))
+		return float64(vt)
 	case float64:
-		return in.(float64)
+		return vt
 	}
 	return ifFailed
 }

@@ -16,6 +16,10 @@ func WriteAllBytes(file string, content []byte) error {
 	return WriteAllText(file, string(content))
 }
 
+func WriteAllByte(file string, content []byte) error {
+	return WriteAllBytes(file, content)
+}
+
 func WriteAllLines(file string, content []string) error {
 	fo, err := os.Create(file)
 	if err != nil {

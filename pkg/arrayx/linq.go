@@ -2,7 +2,7 @@ package arrayx
 
 // Last returns the last element of an array.
 func Last[T any](l []T) (last T, ok bool) {
-	if l == nil || len(l) == 0 {
+	if len(l) == 0 {
 		return last, false
 	}
 	return l[len(l)-1], true
@@ -10,7 +10,7 @@ func Last[T any](l []T) (last T, ok bool) {
 
 // First returns the first element of an array.
 func First[T any](l []T) (fst T, ok bool) {
-	if l == nil || len(l) == 0 {
+	if len(l) == 0 {
 		return fst, false
 	}
 	return l[0], true

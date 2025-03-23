@@ -16,6 +16,10 @@ func ReadAllByte(file string) (bs []byte, err error) {
 	return io.ReadAll(f)
 }
 
+func ReadAllBytes(file string) (bs []byte, err error) {
+	return ReadAllByte(file)
+}
+
 func ReadAllText(file string) (str string, err error) {
 	var bs []byte
 	bs, err = ReadAllByte(file)

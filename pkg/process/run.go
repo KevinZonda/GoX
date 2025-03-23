@@ -11,7 +11,7 @@ type Runnable struct {
 	Wait bool
 }
 
-func (r Runnable) run() (cmd *exec.Cmd, err error) {
+func (r Runnable) Run() (cmd *exec.Cmd, err error) {
 	if r.Wait {
 		return RunWithWait(r.Name, r.Args...)
 	}

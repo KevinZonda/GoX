@@ -1,9 +1,10 @@
 package arrayx
 
 import (
-	"github.com/KevinZonda/GoX/pkg/constrains"
 	"math/rand"
 	"time"
+
+	"github.com/KevinZonda/GoX/pkg/constraint"
 )
 
 // HasDuplicate returns true if the array has duplicate items.
@@ -49,7 +50,7 @@ func Reverse[T any](a []T) {
 	}
 }
 
-func Sum[T constrains.Calculable](arr []T) T {
+func Sum[T constraint.Calculable](arr []T) T {
 	var sum T
 	for _, v := range arr {
 		sum += v

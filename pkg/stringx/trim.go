@@ -24,3 +24,11 @@ func TrimAllAndClean(ss []string) []string {
 	}
 	return r
 }
+
+func TrimLower(s string) string {
+	return strings.ToLower(strings.TrimSpace(s))
+}
+
+func TrimUpper(s string) string {
+	return strings.ToUpper(strings.TrimSpace(s))
+}
